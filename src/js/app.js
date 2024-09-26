@@ -89,3 +89,38 @@ window.onload = function() {
     });
   });
 };
+window.onload = function() {
+  window.variables = {
+    includeCover: true,
+    background: "https://images.unsplash.com/photo-1511974035430-5de47d3b95da",
+    avatarURL: "https://randomuser.me/api/portraits/women/42.jpg",
+    socialMediaPosition: "position-left",
+
+    twitter: null,
+    github: null,
+    linkedin: null,
+    instagram: null,
+    name: null,
+    lastName: null,
+    role: null,
+    country: null,
+    city: null
+  };
+  render(window.variables);
+
+  document.querySelectorAll(".picker").forEach(function(elm) {
+    elm.addEventListener("change", function(e) {
+      const attribute = e.target.getAttribute("for");
+      let values = {};
+      values[attribute] =
+        this.value == "" || this.value == "null"
+          ? null
+          : this.value == "true"
+          ? true
+          : this.value == "false"
+          ? false
+          : this.value;
+      render(Object.assign(window.variables, values));
+    });
+  });
+};
